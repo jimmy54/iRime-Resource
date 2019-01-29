@@ -1,0 +1,122 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: wubi98
+  name: "98五笔"
+  version: "1.53"
+  author:
+    - 發明人 王永民
+  description: |
+    五笔98版
+    碼表源自 yanhuacuo
+    敲 z 鍵進入拼音反查
+  dependencies:
+    - pinyin_simp
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ ，。, ，． ]
+  - name: extended_charset
+    states: [ 通用, 增廣 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - table_translator@fixed
+    - table_translator
+    - punct_translator
+    - reverse_lookup_translator
+  filters:
+    - uniquifier
+
+speller:
+  auto_select: false
+  delimiter: "`"
+  max_code_length: 4
+  
+
+fixed:
+  # ↓ 字典文件 
+  dictionary: wubi98
+  # ↓ 该翻译器出字优先级别
+  initial_quality: 1000
+  # ↓ 字符集过滤，低重形码用不着
+  enable_charset_filter: false
+  # ↓ 自动造句，形码用不着
+  enable_sentence: false
+  # ↓ 自动造词，看需求
+  enable_encoder: false
+  # ↓ 对已上屏的内容整合成词条儿，看需求
+  encode_commit_history: false
+  # ↓ 自动造词的最长字数，看需求
+  max_phrase_length: 4
+  # ↓ 逐渐提示，看需求
+  enable_completion: false
+  # ↓ 是否开启用户词典，以记录动态字频和用户词词频
+  enable_user_dict: false
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+translator:
+  # ↓ 字典文件 
+  dictionary: wubi98
+  # ↓ 该翻译器出字优先级别
+  initial_quality: 0.5
+  # ↓ 字符集过滤，低重形码用不着
+  enable_charset_filter: false
+  # ↓ 自动造句，形码用不着
+  enable_sentence: true
+  # ↓ 自动造词，看需求
+  enable_encoder: true
+  # ↓ 对已上屏的内容整合成词条儿，看需求
+  encode_commit_history: true
+  # ↓ 自动造词的最长字数，看需求
+  max_phrase_length: 4
+  # ↓ 逐渐提示，看需求
+  enable_completion: true
+  # ↓ 是否开启用户词典，以记录动态字频和用户词词频
+  enable_user_dict: true
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+
+reverse_lookup:
+  dictionary: pinyin_simp
+  prefix: "z"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+
+punctuator:
+  import_preset: symbols
+key_binder:
+  import_preset: default
+  bindings:
+      - { when: has_menu, accept: semicolon, send: 2 }
+      - { when: has_menu, accept: period, send: 1 }
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "^z[a-z]*'?$"
