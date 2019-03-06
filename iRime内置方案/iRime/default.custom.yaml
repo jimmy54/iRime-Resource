@@ -1,0 +1,14 @@
+patch:
+    schema_list:
+        - schema: flypy
+        - schema: flypyplus
+        - schema: wubi86
+        - schema: wubi_pinyin
+        - schema: double_pinyin_abc
+        - schema: double_pinyin_flypy
+        - schema: double_pinyin_mspy
+        - schema: double_pinyin_pyjj
+        - schema: wubi98
+        - schema: 091wubi
+        - schema: luna_pinyin
+

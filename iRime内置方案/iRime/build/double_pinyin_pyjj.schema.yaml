@@ -1,0 +1,250 @@
+__build_info:
+  rime_version: 1.4.0
+  timestamps:
+    default: 1551884950
+    default.custom: 1551886590
+    double_pinyin_pyjj.custom: 0
+    double_pinyin_pyjj.schema: 1419300948
+engine:
+  filters:
+    - simplifier
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - script_translator
+key_binder:
+  bindings:
+    - {accept: "Control+p", send: Up, when: composing}
+    - {accept: "Control+n", send: Down, when: composing}
+    - {accept: "Control+b", send: Left, when: composing}
+    - {accept: "Control+f", send: Right, when: composing}
+    - {accept: "Control+a", send: Home, when: composing}
+    - {accept: "Control+e", send: End, when: composing}
+    - {accept: "Control+d", send: Delete, when: composing}
+    - {accept: "Control+k", send: "Shift+Delete", when: composing}
+    - {accept: "Control+h", send: BackSpace, when: composing}
+    - {accept: "Control+g", send: Escape, when: composing}
+    - {accept: "Control+bracketleft", send: Escape, when: composing}
+    - {accept: "Alt+v", send: Page_Up, when: composing}
+    - {accept: "Control+v", send: Page_Down, when: composing}
+    - {accept: ISO_Left_Tab, send: Page_Up, when: composing}
+    - {accept: "Shift+Tab", send: Page_Up, when: composing}
+    - {accept: Tab, send: Page_Down, when: composing}
+    - {accept: minus, send: Page_Up, when: has_menu}
+    - {accept: equal, send: Page_Down, when: has_menu}
+    - {accept: comma, send: Page_Up, when: paging}
+    - {accept: period, send: Page_Down, when: has_menu}
+    - {accept: "Control+Shift+1", select: .next, when: always}
+    - {accept: "Control+Shift+2", toggle: ascii_mode, when: always}
+    - {accept: "Control+Shift+3", toggle: full_shape, when: always}
+    - {accept: "Control+Shift+4", toggle: simplification, when: always}
+    - {accept: "Control+Shift+5", toggle: extended_charset, when: always}
+    - {accept: "Control+Shift+exclam", select: .next, when: always}
+    - {accept: "Control+Shift+at", toggle: ascii_mode, when: always}
+    - {accept: "Control+Shift+numbersign", toggle: full_shape, when: always}
+    - {accept: "Control+Shift+dollar", toggle: simplification, when: always}
+    - {accept: "Control+Shift+percent", toggle: extended_charset, when: always}
+    - {accept: "Shift+space", toggle: full_shape, when: always}
+    - {accept: "Control+period", toggle: ascii_punct, when: always}
+  import_preset: default
+menu:
+  page_size: 5
+punctuator:
+  full_shape:
+    " ": {commit: "　"}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": ["＃", "⌘"]
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["％", "°", "℃"]
+    "&": "＆"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["＊", "·", "・", "×", "※", "❂"]
+    "+": "＋"
+    ",": {commit: "，"}
+    "-": "－"
+    .: {commit: "。"}
+    "/": ["／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "＝"
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "｀"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": "～"
+  half_shape:
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": "#"
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["%", "％", "°", "℃"]
+    "&": "&"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["*", "＊", "·", "・", "×", "※", "❂"]
+    "+": "+"
+    ",": {commit: "，"}
+    "-": "-"
+    .: {commit: "。"}
+    "/": ["、", "/", "／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "="
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": "@"
+    "[": ["「", "【", "〔", "［"]
+    "\\": ["、", "\\", "＼"]
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "`"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "|", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": ["~", "～"]
+  import_preset: default
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    reverse_lookup: "`[a-z]*'?$"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+reverse_lookup:
+  comment_format:
+    - "xform/([nl])v/$1ü/"
+  dictionary: stroke
+  enable_completion: true
+  preedit_format:
+    - "xlit/hspnz/一丨丿丶乙/"
+  prefix: "`"
+  suffix: "'"
+  tips: "〔筆畫〕"
+schema:
+  author:
+    - "佛振 <chen.sst@gmail.com>"
+    - "Ye Zhou"
+  dependencies:
+    - stroke
+  description: |
+    朙月拼音＋拼音加加雙拼方案。
+    
+  name: "拼音加加雙拼"
+  schema_id: double_pinyin_pyjj
+  version: 0.03
+speller:
+  algebra:
+    - "erase/^xx$/"
+    - "derive/^([jqxy])u$/$1v/"
+    - "derive/^([aoe].*)$/o$1/"
+    - "xform/^([ae])(.*)$/$1$1$2/"
+    - "xform/iu$/N/"
+    - "xform/[iu]a$/B/"
+    - "xform/er$|ing$/Q/"
+    - "xform/[uv]an$/C/"
+    - "xform/[uv]e$|uai$/X/"
+    - "xform/^sh/I/"
+    - "xform/^ch/U/"
+    - "xform/^zh/V/"
+    - "xform/uo$/O/"
+    - "xform/[uv]n$/Z/"
+    - "xform/i?ong$/Y/"
+    - "xform/[iu]ang$/H/"
+    - "xform/(.)en$/$1R/"
+    - "xform/(.)eng$/$1T/"
+    - "xform/(.)ang$/$1G/"
+    - "xform/ian$/J/"
+    - "xform/(.)an$/$1F/"
+    - "xform/iao$/K/"
+    - "xform/(.)ao$/$1D/"
+    - "xform/(.)ai$/$1S/"
+    - "xform/(.)ei$/$1W/"
+    - "xform/ie$/M/"
+    - "xform/ui$/V/"
+    - "xform/(.)ou$/$1P/"
+    - "xform/in$/L/"
+    - "xlit/QWRTYUIOPSDFGHMJCKLZXVBN/qwrtyuiopsdfghmjcklzxvbn/"
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "西文"]
+  - name: full_shape
+    states: ["半角", "全角"]
+  - name: simplification
+    states: ["漢字", "汉字"]
+  - name: ascii_punct
+    states: ["。，", "．，"]
+translator:
+  dictionary: luna_pinyin
+  preedit_format:
+    - "xform/([aoe])(\\w)/0$2/"
+    - "xform/([bpmnljqxy])l/$1IN/"
+    - "xform/(\\w)t/$1ENG/"
+    - "xform/(\\w)n/$1IU/"
+    - "xform/([gkhvuirzcs])b/$1UA/"
+    - "xform/(\\w)b/$1IA/"
+    - "xform/([dtnlgkhjqxyvuirzcs])c/$1UAN/"
+    - "xform/0r/ER/"
+    - "xform/([dtgkhvuirzcs])v/$1UI/"
+    - "xform/(\\w)v/$1V/"
+    - "xform/([gkhvuirzcs])x/$1UAI/"
+    - "xform/(\\w)x/$1VE/"
+    - "xform/([dtnlgkhvuirzcs])o/$1UO/"
+    - "xform/(\\w)z/$1UN/"
+    - "xform/([jqx])y/$1IONG/"
+    - "xform/(\\w)y/$1ONG/"
+    - "xform/([jqxnl])h/$1IANG/"
+    - "xform/(\\w)h/$1UANG/"
+    - "xform/(\\w)r/$1EN/"
+    - "xform/(\\w)g/$1ANG/"
+    - "xform/(\\w)f/$1AN/"
+    - "xform/(\\w)d/$1AO/"
+    - "xform/(\\w)s/$1AI/"
+    - "xform/(\\w)w/$1EI/"
+    - "xform/(\\w)m/$1IE/"
+    - "xform/(\\w)k/$1IAO/"
+    - "xform/(\\w)p/$1OU/"
+    - "xform/(\\w)j/$1IAN/"
+    - "xform/(0)q/$1ER/"
+    - "xform/(\\w)q/$1ING/"
+    - "xform/0(\\w)/$1/"
+    - "xlit/QWRTYUIOPSDFGHMJCKLZXVBNAEIOU/qwrtyuiopsdfghmjcklzxvbnaeiou/"
+    - "xform/(^|[ '])v/$1zh/"
+    - "xform/(^|[ ‘])u/$1ch/"
+    - "xform/(^|[ ‘])i/$1sh/"
+    - "xform/([jqxy])v/$1u/"
+    - "xform/([nl])v/$1ü/"
+  prism: double_pinyin_pyjj
