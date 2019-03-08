@@ -1,0 +1,178 @@
+# Rime schema settings
+# encoding: utf-8
+# generated at 2019-03-07 17:57:50.157326 by 小泉
+# vim: et:ts=2:sw=2:sts=2:fenc=utf8:ft=yaml
+#
+# [Description] 
+#   小泉郑码，超大字集
+
+schema:
+  schema_id: xqzm
+  name: 小泉郑码
+  version: "0.5.4"
+  author:
+    - "xq / 风入松"
+  description:
+    敲 ` 键进入拼音反查，依赖 pinyin_simp 方案
+    小泉郑码，超大字集
+  dependencies:
+    - pinyin_simp
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ "中文", "西文" ]
+  - name: full_shape
+    states: [ "半角", "全角" ]
+  - options: [ utf8, gbk ]
+    states:
+      - UTF-8
+      - GBK
+  - name: s2t
+    states: [ 常规, 繁体 ]
+  - name: emoji_suggestion
+    states: [ "🈚️️\uFE0E", "🈶️️\uFE0F" ]
+    reset: 1
+  - name: pinyin_tip
+    states: ["编码", "拼音"]
+    reset: 0
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor 
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - echo_translator
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - table_translator@custom_phrase
+  filters:
+    - simplifier
+    - charset_filter@gbk
+    - charset_filter@big5
+    - reverse_lookup_filter@zhengma_lookup
+    - simplifier@pinyin_input
+    - simplifier@pinyin_tip
+    - simplifier@emoji_suggestion
+    - uniquifier
+
+## https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: "'"
+  max_code_length: 4
+  use_space: false
+  auto_select: false # 顶字上屏
+
+translator:
+  dictionary: &dict
+    xqzm
+  initial_quality: 100000
+  enable_charset_filter: false
+  enable_encoder: false
+  enable_user_dict: false
+  enable_sentence: false
+  enable_encoder: false
+  encode_commit_history: false
+  enable_completion: true
+  #max_phrase_length: 4
+
+custom_phrase:
+  dictionary: ""
+  user_dict: xqzm_custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 1000
+
+simplifier:
+  opencc_config: s2t.json
+  option_name: s2t
+  tags: [ abc ]
+  tips: all
+
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+
+pinyin_tip:
+  opencc_config: py.json
+  option_name: pinyin_tip 
+  show_in_comment: true
+  overwrite_comment: true
+  comment_format:
+    - "xform/'/ /"
+  tags: [abc]
+  tips: all
+
+abc_segmentor:
+  extra_tags:
+    - reverse_lookup
+
+big5:
+  option_name: big5
+  charset: big5
+gbk:
+  option_name: gbk
+  charset: gbk
+
+reverse_lookup:
+  dictionary: pinyin_simp
+  prefix: "`"
+  suffix: ";"
+  tips: 〔拼音〕
+  preedit_format:
+    - "xform/([nl])v/$1ü/"
+    - "xform/([nl])ue/$1üe/"
+    - "xform/([jqxy])v/$1u/"
+
+zhengma_lookup:
+  tags: [ abc, pinyin ]
+  dictionary: *dict
+  overwrite_comment: false
+  comment_format:
+    #- "xform/$/」/"
+    #- "xform/^/「/"
+
+key_binder:
+  import_preset: default
+  bindings:
+    - {when: has_menu, accept: semicolon, send: 2}
+    - {when: has_menu, accept: apostrophe, send: 3}
+    - {when: always, accept: Release+Escape, toggle: ascii_mode}
+    - {when: paging, accept: comma, send: Page_Up}
+    - {when: has_menu, accept: period, send: Page_Down}
+
+editor:
+  bindings:
+    "Control+Return": commit_comment
+
+punctuator:
+  import_preset: symbols
+  half_shape:
+    '/' : [ '/', ／, ÷ ]
+    '#' : '#'
+    #'=' : '='
+
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[a-z][-_.0-9a-z]*@.*$"
+    url: "^(www[.]|https?:|ftp:|mailto:).*$"
+    reverse_lookup: "`[a-z]*;?$"
+    punct: "^/([a-z]+|[0-9])$"
+
