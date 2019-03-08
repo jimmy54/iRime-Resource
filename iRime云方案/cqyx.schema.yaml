@@ -1,0 +1,106 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: cqyx
+  name: "超强音形"
+  version: "1.0"
+  author:
+    - 付东升
+  description: |
+    超强音形。按`键临时拼音或者用拼音反查编码
+  dependencies:
+    - pinyin_simp
+
+menu:
+  page_size: 8 #候选项数，超强用了eiouv选重，即最高共六重码，所以本方案最低建议采用固定六候选的方式
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+  - name: traditional
+    states: [ 汉字, 漢字 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - table_translator@custom_userdict
+
+speller:
+  alphabet: 'abcdefghijklmnopqrstuvwxyz'
+  initials: 'abcdefghijklmnopqrstuvwxyz'
+  delimiter: " ;'"
+  #auto_clear: auto #manual|auto|max_length 空码按下一键确认清屏|空码自动清|达到最长码时后码顶上清屏
+  auto_select: true 
+  #max_code_length: 4  # 4码顶字上屏
+
+translator:
+  dictionary: cqyx
+  prism: cqyx
+  enable_charset_filter: true
+  enable_encoder: false
+  enable_completion: true
+  enable_sentence: false
+  encode_commit_history: true
+  enable_user_dict: false
+  max_phrase_length: 4
+
+custom_userdict:
+  dictionary: ""
+  user_dict: cqyx_userdict
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: -1
+
+#拼音反查和混输
+reverse_lookup:
+  dictionary: pinyin_simp
+  prefix: "i"
+  suffix: "'"
+  tips: 〔拼音〕
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+
+punctuator:
+  import_preset: default
+  full_shape:
+    "/" : "、"
+  half_shape:
+    "/" : "、"
+
+key_binder:
+  import_preset: default
+  bindings:
+    - {accept: "Shift+space", toggle: noop, when: always}
+    - {accept: semicolon, send: 2, when: has_menu} #分号选第2重码
+    - {accept: apostrophe, send: 3, when: has_menu} #引号选第3重码
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "i[a-z]*'?$"
