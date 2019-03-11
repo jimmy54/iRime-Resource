@@ -4,7 +4,7 @@
 schema:
   schema_id: xkjd6
   name: 键道6
-  version: "1"
+  version: "1.0"
   dependencies:
     - xkjd6cx
 

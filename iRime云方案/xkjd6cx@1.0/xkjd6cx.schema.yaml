@@ -4,7 +4,7 @@
 schema:
   schema_id: xkjd6cx
   name: 键道6反查
-  version: "1"
+  version: "1.0"
 
 switches:
   - name: ascii_mode

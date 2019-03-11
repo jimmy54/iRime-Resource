@@ -4,7 +4,7 @@
 schema:
   schema_id: zyenpheng
   name: 中古全拼
-  version: "2014.04.30"
+  version: "0.3"
   author:
     - 古韻 <biopolyhedron@gmail.com>
   description: |

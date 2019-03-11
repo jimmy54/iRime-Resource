@@ -4,7 +4,7 @@
 schema:
   schema_id: sampheng
   name: 中古三拼
-  version: "2014.04.30"
+  version: "0.9"
   author:
     - "polyhedron <biopolyhedron@gmail.com>"
     - "Lely <fourseasons4ji@gmail.com>"
