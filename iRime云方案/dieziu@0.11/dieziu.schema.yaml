@@ -2,9 +2,9 @@
 # encoding: UTF-8 w/o BOM
 
 schema:
-  schema_id: tenghai
-  name: 潮語拼音·澄海
-  version: "2019.02.11"
+  schema_id: dieziu
+  name: 潮語拼音·潮州
+  version: "0.11"
   author:
     - 騰達 <dieghv@126.com>
   description: |
@@ -56,6 +56,14 @@ speller:
     # 去掉聲調
     - xform/[1-8]//
 
+    # 針對新派的模糊音
+    - derive/am/ang/
+    - derive/ap/ak/
+    - derive/em/eng/
+    - derive/ep/ek/
+    - derive/im/ing/
+    - derive/ip/ik/
+
     # 兼容漢語拼音的拼寫習慣
     - derive/au/ao/
 
@@ -80,7 +88,7 @@ speller:
     - abbrev/^(ng).+$/$1/
 
 translator:
-  dictionary: tenghai
+  dictionary: dieziu
   spelling_hints: 5
   preedit_format:
     # 便捷鍵還原
