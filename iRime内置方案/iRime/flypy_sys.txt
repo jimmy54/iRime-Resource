@@ -232,6 +232,7 @@ http://flypy.ys168.com	xhwp
 廴	obz	99
 辶	obz	98
 ”	oc
+、	od
 （	oh
 😊	oi
 ）	oj
@@ -955,7 +956,6 @@ $	ofhb	99
 ◆	otf	96
 √	otg	100
 γ	otg	99
-·	otg	98
 ＆	oth	100
 ※	oth	99
 §	oth	98
@@ -997,14 +997,14 @@ m³	otl	100
 ₂	otx	100
 ₃	otx	99
 ₄	otx	98
-ₙ	otx	97
 ☆	otx	95
 ★	otx	94
 ≤	otx	97
 ＜	otx	96
-£	oty	100
-○	oty	99
-●	oty	98
+·	oty	100
+£	oty	99
+○	oty	98
+●	oty	97
 ℃	ouud
 ？	ow
 凹	oxa
