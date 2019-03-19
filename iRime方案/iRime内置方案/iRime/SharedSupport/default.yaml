@@ -5,14 +5,16 @@ config_version: "0.36"
 
 schema_list:
   - schema: luna_pinyin
-  - schema: wubi86
   - schema: wubi_pinyin
   - schema: double_pinyin_abc
   - schema: double_pinyin_flypy
   - schema: double_pinyin_mspy
   - schema: double_pinyin_pyjj
+  - schema: wubi86
+  - schema: wubi091
   - schema: wubi98
-  - schema: 091wubi
+  - schema: flypy
+  - schema: flypyplus
 
 switcher:
   caption: 〔方案選單〕

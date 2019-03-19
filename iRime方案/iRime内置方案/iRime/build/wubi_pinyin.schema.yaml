@@ -1,10 +1,10 @@
 __build_info:
-  rime_version: 1.4.0
+  rime_version: 1.4
   timestamps:
-    default: 1551884950
-    default.custom: 1551886633
+    default: 1552919042
+    default.custom: 1552919062
     wubi_pinyin.custom: 0
-    wubi_pinyin.schema: 1419300948
+    wubi_pinyin.schema: 1552904418
 abc_segmentor:
   extra_tags:
     - reverse_lookup

@@ -1,0 +1,31 @@
+name: wubi091.extended
+version: "2015-07-31"
+sort: original #by_weight/权重 original/原始
+use_preset_vocabulary: true
+# 导入别的码表，可以添加多个
+import_tables:
+- wubi091
+...
+# ----- 码表开始 -----
+# 格式：字词	键码	候选位置（中间是tab，不是空格）
+# '#'开头的只是注释，所以可以随便分类了
+
+
+# ----- 帐号 -----
+青枫	gesm
+kylebing@163.com	kyle
+
+# ----- 人名 -----
+# 亲戚
+邓波  cbih
+杨龙秀 sdte
+
+# 朋友
+
+# 同学
+
+# 同事
+
+# ----- 地名 -----
+
+

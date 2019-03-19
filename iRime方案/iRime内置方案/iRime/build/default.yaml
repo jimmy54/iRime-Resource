@@ -1,8 +1,8 @@
 __build_info:
-  rime_version: 1.4.0
+  rime_version: 1.4
   timestamps:
-    default: 1551884950
-    default.custom: 1551886633
+    default: 1552919042
+    default.custom: 1552919062
 ascii_composer:
   good_old_caps_lock: true
   switch_key:
@@ -123,16 +123,16 @@ recognizer:
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
 schema_list:
-  - schema: flypy
-  - schema: flypyplus
+  - schema: wubi98
+  - schema: wubi091
   - schema: wubi86
   - schema: wubi_pinyin
+  - schema: flypy
+  - schema: flypyplus
   - schema: double_pinyin_abc
   - schema: double_pinyin_flypy
   - schema: double_pinyin_mspy
   - schema: double_pinyin_pyjj
-  - schema: wubi98
-  - schema: 091wubi
   - schema: luna_pinyin
 switcher:
   abbreviate_options: true

@@ -1,12 +1,12 @@
 __build_info:
-  rime_version: 1.4.0
+  rime_version: 1.4
   timestamps:
-    default: 1551884950
-    default.custom: 1551886633
-    symbols: 1419300948
+    default: 1552919042
+    default.custom: 1552919062
+    symbols: 1552904418
     symbols.custom: 0
     wubi98.custom: 0
-    wubi98.schema: 1548753260
+    wubi98.schema: 1552904418
 engine:
   filters:
     - uniquifier

@@ -1,10 +1,10 @@
 __build_info:
-  rime_version: 1.4.0
+  rime_version: 1.4
   timestamps:
-    default: 1551884950
-    default.custom: 1551886633
+    default: 1552919042
+    default.custom: 1552919062
     double_pinyin_abc.custom: 0
-    double_pinyin_abc.schema: 1419300948
+    double_pinyin_abc.schema: 1552904418
 engine:
   filters:
     - simplifier
