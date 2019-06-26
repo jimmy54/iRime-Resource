@@ -139,9 +139,9 @@ use_preset_vocabulary: true
 儑	o5
 䫜	ao1
 㕭	ao1
-咬	ao1
+咬	ao1	1%
 咬	iao3
-咬	jao1
+咬	jao1	1%
 坳	ao1
 眑	ao1
 眑	iou3
@@ -281,10 +281,10 @@ use_preset_vocabulary: true
 呆	ä2
 呆	dä1
 崖	ä2
-崖	i2
+崖	i2	1%
 厓	ä2
 涯	ä2
-涯	i2
+涯	i2	1%
 猚	ä2
 猚	luei3
 啀	ä2
@@ -374,9 +374,9 @@ use_preset_vocabulary: true
 峉	ä5
 詻	ä5
 䩹	ä5
-啞	ä5
+啞	ä5	1%
 啞	ia3
-啞	ia4
+啞	ia4	1%
 𩚬	ä5
 𩚚	ä5
 𩜄	ä5
@@ -420,11 +420,11 @@ use_preset_vocabulary: true
 蚆	ba1
 蚆	pa1
 吧	ba1
-吧	pa1
+吧	pa1	1%
 疤	ba1
 扒	ba1
 扒	ba5
-扒	bä4
+扒	bä4	1%
 扒	bie5
 把	ba3
 靶	ba3
@@ -439,10 +439,10 @@ use_preset_vocabulary: true
 垻	ba4
 壩	ba4
 爸	ba4
-爸	bo4
+爸	bo4	1%
 𤝡	ba4
 杷	ba4
-杷	bä4
+杷	bä4	1%
 杷	pa2
 耙	ba4
 𦫙	ba4
@@ -451,12 +451,11 @@ use_preset_vocabulary: true
 罷	ba4
 罷	bä4
 罷	bi4
-罷	pi2
+罷	pi2	1%
 𥎱	ba5
 八	ba5
 𩡩	ba5
 朳	ba5
-捌	ba5
 捌	ba5
 㺴	ba5
 䤢	ba5
@@ -4030,9 +4029,9 @@ use_preset_vocabulary: true
 情	cin2
 晴	cin2
 夝	cin2
-請	cin2
+請	cin2	1%
 請	cin3
-請	zin4
+請	zin4	1%
 䝼	cin2
 䝼	zin4
 𩷒	cin2
@@ -19734,14 +19733,14 @@ use_preset_vocabulary: true
 矢	shr3
 𠂕	shr3
 始	shr3
-史	sy3
+史	sy3	1%
 史	shr3
-使	sy3
+使	sy3	1%
 使	shr3
-使	sy4
-駛	sy3
+使	sy4	1%
+駛	sy3	1%
 駛	shr3
-駛	sy4
+駛	sy4	1%
 𩰢	sy3
 𩰢	sy4
 是	shr4
