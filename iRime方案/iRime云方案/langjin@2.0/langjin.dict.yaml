@@ -470,13 +470,9 @@ use_preset_vocabulary: true
 鈸	ba5
 鈸	bo5
 跋	bo5
-跋	bo5
-䟛	bo5
 䟛	bo5
 䟛	fei4
 𧺡	bo5
-𧺡	bo5
-𧺺	bo5
 𧺺	bo5
 邦	bang1
 𤰫	bang1
@@ -534,12 +530,12 @@ use_preset_vocabulary: true
 舨	bang3
 阪	bang3
 阪	bang4
-阪	fang3 
+阪	fang3	1%
 坂	bang3
-坂	fang3 
+坂	fang3	1%
 榜	bang3
-榜	ben4
-榜	pen2
+榜	ben4	1%
+榜	pen2	1%
 牓	bang3
 螃	bang3
 螃	bang4
@@ -593,9 +589,9 @@ use_preset_vocabulary: true
 釆	bang4
 扮	bang4
 扮	fen1
-扮	fen3
-扮	fen4
-扮	hua3
+扮	fen3	1%
+扮	fen4	1%
+扮	hua3	1%
 傍	bang4
 傍	pang2
 徬	bang4
@@ -699,9 +695,9 @@ use_preset_vocabulary: true
 矲	bä4
 猈	bä4
 猈	pä2
-憊	bä4
+憊	bä4	1%
 憊	bei4
-𢟡	bä4
+𢟡	bä4	1%
 𢟡	bei4
 䥯	bä4
 㔥	bä4
@@ -780,13 +776,12 @@ use_preset_vocabulary: true
 匐	bä5
 匐	fu5
 𠣵	bä5
-仆	bä5
+仆	bä5	1%
 仆	fu4
-仆	fu4
-仆	pou4
-菩	bä5
+仆	pou4	1%
+菩	bä5	1%
 菩	bei4
-菩	fu4
+菩	fu4	1%
 菩	pu2
 垘	bä5
 䵗	bä5
@@ -805,8 +800,8 @@ use_preset_vocabulary: true
 彼	bei3
 彼	bi3
 㗗	bei3
-㗗	bi1
-㗗	bi3
+㗗	bi1	1%
+㗗	bi3	1%
 琲	bei4
 㻗	bei4
 痱	bei4
@@ -837,9 +832,9 @@ use_preset_vocabulary: true
 旆	bei4
 軷	bei4
 軷	bo5
-佩	bei4
+佩	bei4	1%
 佩	pei4
-珮	bei4
+珮	bei4	1%
 珮	pei4
 孛	bei4
 孛	bo5
