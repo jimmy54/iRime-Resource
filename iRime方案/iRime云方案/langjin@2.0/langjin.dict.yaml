@@ -5096,8 +5096,8 @@ use_preset_vocabulary: true
 䔲	den1
 㽅	den1
 䳾	den1
-打	den3
-打	din3
+打	den3	1%
+打	din3	1%
 戥	den3
 嶝	den4
 鐙	den4
@@ -5291,7 +5291,7 @@ use_preset_vocabulary: true
 䵂	di5
 䵂	zhr5
 頔	di5
-頔	qin3
+頔	qong3
 梑	di5
 䊮	di5
 䢮	di5
@@ -8588,7 +8588,7 @@ use_preset_vocabulary: true
 脝	hen1
 悙	hen1
 亨	hen1
-亨	pen1
+亨	pin1
 亨	xang3
 哼	hen1
 啈	hen1
@@ -8602,10 +8602,11 @@ use_preset_vocabulary: true
 珩	hen2
 蘅	hen2
 𦣍	hen2
-莖	hen2
+莖	xin2
 莖	in1
-䪫	hen2
-牼	hen2
+莖	jin1
+䪫	xin2
+牼	xin2
 牼	ken1
 恒	hen2
 𢛢	hen2
@@ -8614,6 +8615,9 @@ use_preset_vocabulary: true
 恨	hen4
 絎	hen4
 䛭	hen4
+杏	hen4
+荇	hen4
+莕	hen4
 訶	ho1
 呵	ho1
 呵	ho4
@@ -10112,6 +10116,7 @@ use_preset_vocabulary: true
 射	i5
 射	ie4
 射	shä5
+射	shr5
 射	she4
 驛	i5
 嶧	i5
@@ -15381,6 +15386,7 @@ use_preset_vocabulary: true
 𡰠	luei2
 𠏢	lo4
 搦	lo5
+搦	luä5
 䚥	lo5
 𧢺	lo5
 搙	lo5
@@ -15427,7 +15433,7 @@ use_preset_vocabulary: true
 𨏒	lo5
 諾	lo5
 硦	lo5
-蹃	lo5
+蹃	luä5
 𠀽	lo5
 硉	lo5
 𥓎	lo5
@@ -17317,7 +17323,7 @@ use_preset_vocabulary: true
 𣂆	pang1
 𣂆	pen2
 磅	pang1
-磅	pen1
+磅	pin1
 龐	pang2
 逄	pang2
 舽	pang2
@@ -17456,9 +17462,10 @@ use_preset_vocabulary: true
 噴	pen4
 歕	pen1
 歕	pen4
-恲	pen1
+恲	pin1
+烹	pin1
 烹	pen1
-澎	pen1
+澎	pin1
 澎	pen2
 怦	pen1
 㛁	pen1
@@ -18318,13 +18325,6 @@ use_preset_vocabulary: true
 螼	qin4
 𤿳	qin3
 赾	qin3
-𩒵	qin3
-㩩	qin3
-䔛	qin3
-檾	qin3
-檾	qong3
-苘	qin3
-苘	qong3
 謦	qin3
 坅	qin3
 𩖄	qin3
@@ -18350,6 +18350,9 @@ use_preset_vocabulary: true
 焪	qong4
 銎	qong1
 銎	xong1
+傾	qong1
+頃	qong1
+頃	qong3
 窮	qong2
 藭	qong2
 𥨪	qong2
@@ -18389,6 +18392,11 @@ use_preset_vocabulary: true
 顈	xän4
 烓	qong3
 烓	uei1
+𩒵	qong3
+㩩	qong3
+䔛	qong3
+檾	qong3
+苘	qong3
 䛪	qong4
 䠻	qong4
 恘	qou1
@@ -19509,7 +19517,7 @@ use_preset_vocabulary: true
 弽	xe5
 𣻣	shä5
 䤮	shä5
-麝	shä5
+麝	shr5
 麝	she4
 奢	she1
 奢	shä1
@@ -23674,8 +23682,6 @@ use_preset_vocabulary: true
 㾙	xin4
 擤	xin3
 杏	xin4
-荇	xin4
-莕	xin4
 幸	xin4
 𡴘	xin4
 𠂷	xin4
@@ -23723,6 +23729,12 @@ use_preset_vocabulary: true
 𧵣	xong1
 雄	xong2
 熊	xong2
+熒	xong2	1%
+褮	xong2
+螢	xong2	1%
+滎	xong2
+䁝	xong2
+𧵣	xong2
 𦬺	xong3
 詗	xong3
 詗	xong4
@@ -26398,7 +26410,6 @@ use_preset_vocabulary: true
 螊	liän2
 龑	iän3
 潜	ciän2
-滎	in2
 熔	iong2
 榕	iong2
 佣	iong4
