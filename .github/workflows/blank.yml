@@ -24,4 +24,4 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
-      run: php /home/runner/work/iRime-Resource/iRime-Resource//iRime方案/iRime云方案/package.php
+      run: php /home/runner/work/iRime-Resource/iRime-Resource/iRime方案/iRime云方案/package.php
