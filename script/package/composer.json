@@ -1,0 +1,14 @@
+{
+    "name": "jimmy54/package",
+    "require": {
+        "symfony/yaml": "^5.1",
+        "aliyuncs/oss-sdk-php": "^2.3",
+        "nelexa/zip": "^3.3"
+    },
+    "authors": [
+        {
+            "name": "jimmy54",
+            "email": "jimmy54@126.com"
+        }
+    ]
+}
