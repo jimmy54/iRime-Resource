@@ -101,7 +101,7 @@ class Package
                 $schemaName = substr($key, 0, $pos);
                 try {
                     $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $schemaName . ".schema.yaml");
-                    echo "read schema :".$key." detail:".print_r($schemaDetail, true)."\n";
+//                    echo "read schema :".$key." detail:".print_r($schemaDetail, true)."\n";
                     $schemaHead = $schemaDetail['schema'];
                     $lasUpdateSchema[$key] = $schemaHead;
                 } catch (ParseException $e) {
