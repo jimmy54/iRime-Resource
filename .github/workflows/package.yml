@@ -6,7 +6,7 @@ name: package
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ dev-0.9.1 ]
   pull_request:
     branches: [ master ]
 
@@ -20,14 +20,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@dev-0.9.1
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    # install yaml
+    - name: update composer
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        cd /home/runner/work/iRime-Resource/iRime-Resource/script/package
+        composer update
+    
+    - name: run s
+      run: echo hello;
+      
+
