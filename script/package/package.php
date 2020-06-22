@@ -16,9 +16,9 @@ class Package
     private $accessKeyId;
     private $accessKeySecret;
 // Endpoint以杭州为例，其它Region请按实际情况填写。
-    private $endpoint;
+    private $endpoint = "oss-cn-hangzhou.aliyuncs.com";
 // 设置存储空间名称。
-    private $bucket;
+    private $bucket = "irime-test";
 
     private $uploadSchemaUrl;
 
@@ -29,9 +29,6 @@ class Package
         }
         $this->accessKeyId = getenv("ACCESSKEYID");
         $this->accessKeySecret = getenv("ACCESSKEYSECRET");
-        $this->endpoint = getenv("ENDPOINT");
-        $this->bucket = getenv("BUCKET");
-        echo "buck:".$this->bucket."\n";
         $this->uploadSchemaUrl = getenv("UPLOADSCHEMAURL");
     }
 
