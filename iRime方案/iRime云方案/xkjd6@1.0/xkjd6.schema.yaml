@@ -1,5 +1,4 @@
-﻿
-schema:
+﻿schema:
   schema_id: xkjd6
   name: 键道6
   version: "1.0"
@@ -183,9 +182,6 @@ reverse_lookup:
     - xform/^/〔/
     - xform/$/〕/
     - xform/ /, /
-
-punctuator:
-  import_preset: symbols
 
 key_binder:
   bindings:
