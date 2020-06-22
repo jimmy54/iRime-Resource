@@ -31,7 +31,7 @@ class Package
         $this->accessKeySecret = getenv("ACCESSKEYSECRET");
         $this->endpoint = getenv("ENDPOINT");
         $this->bucket = getenv("BUCKET");
-        echo "buck:"$this->bucket."\n";
+        echo "buck:".$this->bucket."\n";
         $this->uploadSchemaUrl = getenv("UPLOADSCHEMAURL");
     }
 
