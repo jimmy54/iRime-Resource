@@ -72,7 +72,6 @@ translator:
   enable_encoder: false
   enable_user_dict: false
   enable_sentence: false
-  enable_encoder: false
   encode_commit_history: false
   initial_quality: 0.75
 
