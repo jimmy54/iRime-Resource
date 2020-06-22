@@ -13,14 +13,27 @@ class Package
     const LAST_UPDATE_SCHEMA = __DIR__."/last_update_schema.json";
 
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
-    private $accessKeyId = "LTAIO71m45cSCjAG";
-    private $accessKeySecret = "vkYDBDZRZTkmbpuvBalWKb77zLZSAp";
+    private $accessKeyId;
+    private $accessKeySecret;
 // Endpoint以杭州为例，其它Region请按实际情况填写。
-    private $endpoint = "oss-cn-hangzhou.aliyuncs.com";
+    private $endpoint;
 // 设置存储空间名称。
-    private $bucket = "irime-test";
+    private $bucket;
 
-    private $uploadSchemaUrl = "http://api.5koon.com/web/index.php?r=schema/upload-schemas-detail";
+    private $uploadSchemaUrl;
+
+    function __construct()
+    {
+        if (file_exists(__DIR__."/env.php")){
+            require_once 'env.php';
+        }
+        $this->accessKeyId = getenv("ACCESSKEYID");
+        $this->accessKeySecret = getenv("ACCESSKEYSECRET");
+        $this->endpoint = getenv("ENDPOINT");
+        $this->bucket = getenv("BUCKET");
+        $this->uploadSchemaUrl = getenv("UPLOADSCHEMAURL");
+    }
+
 
     public function run()
     {
@@ -30,46 +43,64 @@ class Package
 
         //get schema files
         $schemaArr = $this->directory_map(self::SCHEMA_PATH, 2);
+
         //filter tmp dir
         unset($schemaArr['tmp']);
 
         if (!is_array($schemaArr)) {
-            echo "\nshcema direstor error:" . print_r($schemaArr, true);
+            $this->echo("\nshcema direstor error:" . print_r($schemaArr, true));
             return;
         }
 
         $lastUpdateSchemas = $this->lastUpdateSchema($schemaArr);
+//        echo "last update schema:".print_r($lastUpdateSchemas, true)."\n";
 
         //need update schema
         $updateSchemaArr = $this->needUpdateSchema($lastUpdateSchemas, $schemaArr);
+//        echo "neet update schema:".print_r($updateSchemaArr, true)."\n";
+
+        $uploadSchema = array();
         foreach ($updateSchemaArr as $key => $value) {
 
             //schema to json
-            $pos = strpos($key, "@");
-            $schemaName = substr($key, 0, $pos);
-            $schemaJson = $this->schemaToJson(self::SCHEMA_PATH . "/" . $key . "/" . $schemaName . ".schema.yaml");
+
+            $schemaDirName =  explode("@", $key);
+            $schemaName = $schemaDirName[0];
+            $schemaVersion = $schemaDirName[1];
+            if (empty($schemaName) || empty($schemaVersion)){
+                echo "schema dir error:".$key;
+                continue;
+            }
 
             //update to mysql
-            if ($this->uploadSchema($schemaJson)){
                 //zip schema file
                 $this->packageZip($value, $key);
 
                 //upload to oss
-                $this->uploadToOSS($key.".zip", self::ZIP_PATH."/".$key.".zip");
+                $this->uploadToOSS($schemaName."_".$schemaVersion.".zip", self::ZIP_PATH."/".$key.".zip");
+
+                $uploadSchema[$key] = $this->schemaToJson(self::SCHEMA_PATH."/".$key."/".$schemaName.".schema.yaml");
+        }
+        if(!empty($uploadSchema)) {
+            echo "upload schema:".print_r($uploadSchema, true);
+            if($this->uploadSchema(json_encode(array_values($uploadSchema)))){
+                foreach ($uploadSchema as $uploadSchemaKey => $uploadSchemaValue){
+                    $lastUpdateSchemas[$uploadSchemaKey] = $uploadSchemaValue;
+                }
+                file_put_contents(self::LAST_UPDATE_SCHEMA, json_encode($lastUpdateSchemas));
             }else{
-                echo $schemaName."upload fail";
+                echo $key."upload fail";
             }
         }
     }
 
     private function lastUpdateSchema($schemaArr)
     {
-        if (!file_exists(self::LAST_UPDATE_SCHEMA)){
-            $lasUpdateSchema = array();
-            foreach ($schemaArr as $key => $value){
+        $lasUpdateSchema = array();
+
+        foreach ($schemaArr as $key => $value){
                 $pos = strpos($key, "@");
                 $schemaName = substr($key, 0, $pos);
-
                 try {
                     $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $schemaName . ".schema.yaml");
                     $schemaHead = $schemaDetail['schema'];
@@ -77,8 +108,9 @@ class Package
                 } catch (ParseException $e) {
                     echo $schemaName.":".$e->getMessage()."\n"; //
                 }
-            }
-            file_put_contents(self::LAST_UPDATE_SCHEMA, json_encode($lasUpdateSchema));
+        }
+
+        if (!file_exists(self::LAST_UPDATE_SCHEMA)){
             return $lasUpdateSchema;
         }
         return json_decode(file_get_contents(self::LAST_UPDATE_SCHEMA), true);
@@ -87,10 +119,14 @@ class Package
 
     private function needUpdateSchema($schemas, $schemaDir)
     {
+        if (!file_exists(self::LAST_UPDATE_SCHEMA)){
+            echo "need update all schema \n";
+            return $schemaDir;
+        }
+
         $ret = array();
-        $filter = array("tmp");
         foreach ($schemaDir as $key => $value){
-            if (!isset($schemas[$key]) && !in_array($key, $filter)){
+            if (!isset($schemas[$key])){
                 $ret[$key] = $value;
             }
         }
@@ -124,7 +160,7 @@ class Package
 
     private function packageZip($files, $dir)
     {
-        echo "flies:" . print_r($files, true) . "\ntoPath:" . self::ZIP_PATH . "/" . $dir . ".zip\n";
+//        echo "flies:" . print_r($files, true) . "\ntoPath:" . self::ZIP_PATH . "/" . $dir . ".zip\n";
         $toPath = self::ZIP_PATH . "/" . $dir . ".zip";
         // create new archive
         $zipFile = new \PhpZip\ZipFile();
@@ -147,19 +183,30 @@ class Package
     {
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-
             $ossClient->uploadFile($this->bucket, $name, $filePath);
+
         } catch (OssException $e) {
             printf(__FUNCTION__ . ": FAILED\n");
             printf($e->getMessage() . "\n");
-            return;
+            return false;
         }
+        return true;
     }
 
 
     private function uploadSchema($schemaJson)
     {
-        return self::post($this->uploadSchemaUrl, array("schemas" => $schemaJson), 30);
+        echo "upload ".$schemaJson."\n";
+        if (empty($schemaJson)){
+            echo "upload schema empty";
+            return false;
+        }
+        $ret = self::post($this->uploadSchemaUrl, array("schemas" => $schemaJson), 30);
+        $ret = json_decode($ret, true);
+        if (empty($ret) || $ret['errorCode'] != 0){
+            return false;
+        }
+        return true;
     }
 
     private function schemaToJson($schemaFile)
@@ -171,13 +218,6 @@ class Package
         }
         return json_encode($value['schema']);
     }
-
-
-    private function saveSchemaJson($schemaJson)
-    {
-
-    }
-
 
     public static function post($url, $postArr = '', $timeout = 5)
     {
@@ -193,9 +233,15 @@ class Package
         if(!$file_contents = curl_exec($ch)){
             echo "post error:".print_r(curl_error($ch), true);
         }
-        echo $file_contents;
+        echo "post response:".$file_contents."\n";
         curl_close($ch);
         return $file_contents;
+    }
+
+
+    private function echo($log)
+    {
+        echo __FUNCTION__."\n".print_r($log, true)."\n";
     }
 }
 
