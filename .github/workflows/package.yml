@@ -6,9 +6,11 @@ name: package
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches:
+    - dev-0.9.1
   pull_request:
-    branches: [ master ]
+    branches:
+    - dev-0.9.1
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,13 +23,20 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with:
+        ref: dev-0.9.1
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    # install yaml
+    - name: update composer
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        cd /home/runner/work/iRime-Resource/iRime-Resource/script/package
+        composer update
+
+    - name: run package script
+      env:
+        ACCESSKEYID: ${ { secrets.ACCESSKEYID } }
+        ACCESSKEYSECRET:  ${{secrets.ACCESSKEYSECRET}}
+        ENDPOINT:  ${ { secrets.ENDPOINT }}
+        BUCKET:  ${ { secrets.BUCKET }}
+        UPLOADSCHEMAURL:  ${ { secrets.UPLOADSCHEMAURL } }
+      run: php /home/runner/work/iRime-Resource/iRime-Resource/script/package/package.php
