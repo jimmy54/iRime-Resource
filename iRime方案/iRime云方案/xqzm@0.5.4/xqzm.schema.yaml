@@ -85,7 +85,6 @@ translator:
   enable_encoder: false
   enable_user_dict: false
   enable_sentence: false
-  enable_encoder: false
   encode_commit_history: false
   enable_completion: true
   #max_phrase_length: 4
