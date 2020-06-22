@@ -32,6 +32,15 @@ jobs:
         cd /home/runner/work/iRime-Resource/iRime-Resource/script/package
         composer update
 
+    - name: show the evn
+      env:
+        ACCESSKEYID: ${ { secrets.ACCESSKEYID } }
+        ACCESSKEYSECRET:  ${{secrets.ACCESSKEYSECRET}}
+        ENDPOINT:  ${ { secrets.ENDPOINT }}
+        BUCKET:  ${ { secrets.BUCKET }}
+        UPLOADSCHEMAURL:  ${ { secrets.UPLOADSCHEMAURL } }
+      run: echo hello $ENDPOINT $BUCKET
+
     - name: run package script
       env:
         ACCESSKEYID: ${ { secrets.ACCESSKEYID } }
