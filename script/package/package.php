@@ -30,7 +30,7 @@ class Package
         $this->accessKeyId = getenv("ACCESSKEYID");
         $this->accessKeySecret = getenv("ACCESSKEYSECRET");
         $this->endpoint = getenv("ENDPOINT");
-        $this->bucket = getenv("BUCKET");
+        $this->bucket = "irime-test";//getenv("BUCKET");
         echo "buck:".$this->bucket."\n";
         $this->uploadSchemaUrl = getenv("UPLOADSCHEMAURL");
     }
