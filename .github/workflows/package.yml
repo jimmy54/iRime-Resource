@@ -7,10 +7,10 @@ name: package
 on:
   push:
     branches:
-    - dev-0.9.1
+    - master
   pull_request:
     branches:
-    - dev-0.9.1
+    - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,7 +24,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       with:
-        ref: dev-0.9.1
+        ref: master
 
     # install yaml
     - name: update composer
