@@ -31,13 +31,13 @@ jobs:
         composer update
     
     - name: run package script
-
+      env:
+        ACCESSKEYID: ${ { secrets.ACCESSKEYID } }
+        ACCESSKEYSECRET:  ${{secrets.ACCESSKEYSECRET}}
+        ENDPOINT:  ${ { secrets.ENDPOINT }}
+        BUCKET:  ${ { secrets.BUCKET }}
+        UPLOADSCHEMAURL:  ${ { secrets.UPLOADSCHEMAURL } }
       run: php /home/runner/work/iRime-Resource/iRime-Resource/script/package/package.php
-      with:
-        env:
-          ACCESSKEYID: ${ { secrets.ACCESSKEYID } }
-          ACCESSKEYSECRET:  ${{secrets.ACCESSKEYSECRET}}
-          ENDPOINT:  ${ { secrets.ENDPOINT }}
-          BUCKET:  ${ { secrets.BUCKET }}
-          UPLOADSCHEMAURL:  ${ { secrets.UPLOADSCHEMAURL } }
+    
+
         
