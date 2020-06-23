@@ -15,10 +15,10 @@ class Package
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
     private $accessKeyId;
     private $accessKeySecret;
-// Endpoint以杭州为例，其它Region请按实际情况填写。
-    private $endpoint = "oss-cn-hangzhou.aliyuncs.com";
-// 设置存储空间名称。
-    private $bucket = "irime-test";
+    // Endpoint以杭州为例，其它Region请按实际情况填写。
+    private $endpoint;
+    // 设置存储空间名称。
+    private $bucket;
 
     private $uploadSchemaUrl;
 
@@ -30,6 +30,8 @@ class Package
         $this->accessKeyId = getenv("ACCESSKEYID");
         $this->accessKeySecret = getenv("ACCESSKEYSECRET");
         $this->uploadSchemaUrl = getenv("UPLOADSCHEMAURL");
+        $this->bucket = getenv("BUCKET");
+        $this->endpoint = getenv("ENDPOINT");
     }
 
 
@@ -101,9 +103,11 @@ class Package
                 $schemaName = substr($key, 0, $pos);
                 try {
                     $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $schemaName . ".schema.yaml");
-//                    echo "read schema :".$key." detail:".print_r($schemaDetail, true)."\n";
-                    $schemaHead = $schemaDetail['schema'];
-                    $lasUpdateSchema[$key] = $schemaHead;
+                    if (isset($schemaDetail['schema'])){
+                        $lasUpdateSchema[$key] = $schemaDetail['schema'];
+                    }else{
+                        echo $key."schema not exsit.\n";
+                    }
                 } catch (ParseException $e) {
                     echo $schemaName.":".$e->getMessage()."\n"; //
                 }
