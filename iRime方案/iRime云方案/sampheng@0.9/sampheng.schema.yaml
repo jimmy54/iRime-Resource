@@ -1,4 +1,6 @@
-﻿schema:
+
+
+schema:
   schema_id: sampheng
   name: 中古三拼
   version: "0.9"
@@ -158,7 +160,7 @@ speller:
     - xform/([jTRDCVZSJAEIOUL])i/$1I/
     - xform/i/K/
     - xform/([jTRDCVZSJAEIOUL])y/$1Y/
-    - xform/y([AQZ])/Y$1/	#幽韻不分AB
+    - xform/y([AQZ])/Y$1/    #幽韻不分AB
     - xform/y/H/
     - xform/[jr]//
     - xlit/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/

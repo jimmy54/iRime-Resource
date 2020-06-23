@@ -106,7 +106,7 @@ class Package
                     if (isset($schemaDetail['schema'])){
                         $lasUpdateSchema[$key] = $schemaDetail['schema'];
                     }else{
-                        echo $key."schema not exsit.\n";
+                        echo $key."schema not exsit.\n"."detail:".print_r($schemaDetail, true)."\n";
                     }
                 } catch (ParseException $e) {
                     echo $schemaName.":".$e->getMessage()."\n"; //
@@ -217,7 +217,7 @@ class Package
         try {
             $value = Yaml::parseFile($schemaFile);
         } catch (ParseException $e) {
-            echo $e->getMessage(); //
+            echo $e->getMessage();
         }
         return json_encode($value['schema']);
     }
