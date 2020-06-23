@@ -26,6 +26,11 @@ jobs:
       with:
         ref: master
 
+    - name: install composer
+      run:  |
+        cd /home/runner/work/iRime-Resource/iRime-Resource/script/package
+        curl -sS https://getcomposer.org/installer | php
+
     # install yaml
     - name: update composer
       run: |
