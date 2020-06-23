@@ -29,13 +29,13 @@ jobs:
     - name: install composer
       run:  |
         echo $HOME
-        cd $HOME/iRime-Resource/iRime-Resource/script/package
+        cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
         curl -sS https://getcomposer.org/installer | php
 
     # install yaml
     - name: update composer
       run: |
-        cd $HOME/iRime-Resource/iRime-Resource/script/package
+        cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
         composer update
 
     - name: run package script
@@ -45,4 +45,4 @@ jobs:
         ENDPOINT:  ${{secrets.ENDPOINT}}
         BUCKET:  ${{secrets.BUCKET}}
         UPLOADSCHEMAURL:  ${{secrets.UPLOADSCHEMAURL}}
-      run: php $HOME/iRime-Resource/iRime-Resource/script/package/package.php
+      run: php /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package/package.php
