@@ -31,13 +31,14 @@ jobs:
         echo $HOME
         cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
         curl -sS https://getcomposer.org/installer | php
+        mv composer.phar /usr/local/bin/composer
         ls -a /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
 
     # install yaml
     - name: update composer
       run: |
         cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
-        /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package/composer update
+        composer update
 
     - name: run package script
       env:
