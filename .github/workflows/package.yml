@@ -54,15 +54,12 @@ jobs:
         UPLOADSCHEMAURL:  ${{secrets.UPLOADSCHEMAURL}}
       run: php ${GITHUB_WORKSPACE}/script/package/package.php
 
-    - name: Git Commit and Push
-      uses: github-actions-x/commit@v2.6
-      with:
-        # Github Token with commit access
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        push-branch: 'master'
-        # Specify commit message
-        commit-message: 'auto commit'
-        files: script/package/last_update_schema.json
+    - name: commit and push
+      run: |
+        git add ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
+        git commit -m 'chore:auto commit'
+        git push
+
 
 
 
