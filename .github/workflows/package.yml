@@ -59,7 +59,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         # Specify commit message
         commit-message: auto commit
-        files: - ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
+        files: ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
 
 
 
