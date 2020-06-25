@@ -28,7 +28,7 @@ jobs:
 
     - name: install composer
       run:  |
-        echo $HOME
+        echo work space ${GITHUB_WORKSPACE}
         cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
         curl -sS https://getcomposer.org/installer | php
         mv composer.phar /usr/local/bin/composer
