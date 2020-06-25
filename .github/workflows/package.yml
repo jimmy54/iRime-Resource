@@ -58,7 +58,7 @@ jobs:
         # Github Token with commit access
         github-token: ${{secrets.GITHUB_TOKEN}}
         # Specify commit message
-        commit-message: 自动更新方案
+        commit-message: auto commit
         files: - ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
 
 
