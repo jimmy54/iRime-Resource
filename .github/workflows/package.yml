@@ -65,8 +65,6 @@ jobs:
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        directory: ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
-
 
 
 
