@@ -11,6 +11,7 @@ on:
     paths:
     - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
     - '${GITHUB_WORKSPACE}/script/package/package.php'
+    - '${GITHUB_WORKSPACE}/.github/workflows/package.yml'
 
   pull_request:
     branches:
@@ -18,6 +19,7 @@ on:
     paths:
     - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
     - '${GITHUB_WORKSPACE}/script/package/package.php'
+    - '${GITHUB_WORKSPACE}/.github/workflows/package.yml'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
