@@ -62,7 +62,7 @@ jobs:
         push-branch: 'master'
         # Specify commit message
         commit-message: 'auto commit'
-        files: last_update_schema.json
+        files: script/package/last_update_schema.json
 
 
 
