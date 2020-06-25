@@ -54,11 +54,18 @@ jobs:
         UPLOADSCHEMAURL:  ${{secrets.UPLOADSCHEMAURL}}
       run: php ${GITHUB_WORKSPACE}/script/package/package.php
 
-    - name: commit and push
+    - name: Commit files
       run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
-        git commit -m 'chore:auto commit'
-        git push
+        git commit -m "auto commit"
+
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        directory: ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
 
 
 
