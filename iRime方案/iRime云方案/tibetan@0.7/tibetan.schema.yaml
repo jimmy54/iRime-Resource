@@ -4,35 +4,35 @@
 
 schema:
   schema_id: tibetan
-  name: "藏文"
-  version: "0.4"
+  name: "藏文方案"
+  version: "0.7"
   author:
-    - polyhedron<biopolyhedron@gmail.com>
-    - Lely<fourseasons4ji@gmail.com>
-  description: 
+  - polyhedron<biopolyhedron@gmail.com>
+  - Lely<fourseasons4ji@gmail.com>
+  description:
     按Wylie轉寫輸入藏文
     分字點按'.'鍵
     如有改進建議，歡迎和作者聯繫！
 
 switches:
-  - name: ascii_mode
-    reset: 0
-    states: [ 藏文, 西文 ]
+- name: ascii_mode
+  reset: 0
+  states: [ 藏文, 西文 ]
 
 engine:
   processors:
-    - ascii_composer
-    - key_binder
-    - speller
-    - selector
-    - navigator
-    - express_editor
+  - ascii_composer
+  - key_binder
+  - speller
+  - selector
+  - navigator
+  - express_editor
   segmentors:
-    - ascii_segmentor
-    - abc_segmentor
-    - fallback_segmentor
+  - ascii_segmentor
+  - abc_segmentor
+  - fallback_segmentor
   translators:
-    - table_translator
+  - table_translator
 
 menu:
   alternative_select_keys: "ABCEFGHJKM"
@@ -41,8 +41,8 @@ speller:
   alphabet: abcdefghijklmnopqrstuvwxyz,.XTDNSRLI0123456789'
   delimiter: ' '
   algebra:
-    - derive/a$//
-    - derive/v/'/
+  - derive/a$//
+  - derive/v/'/
 
 translator:
   dictionary: tibetan
