@@ -9,17 +9,17 @@ on:
     branches:
     - master
     paths:
-    - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
-    - '${GITHUB_WORKSPACE}/script/package/package.php'
-    - '${GITHUB_WORKSPACE}/.github/workflows/package.yml'
+    - 'iRime方案/iRime云方案/*'
+    - 'script/package/package.php'
+    - '.github/workflows/package.yml'
 
   pull_request:
     branches:
     - master
     paths:
-    - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
-    - '${GITHUB_WORKSPACE}/script/package/package.php'
-    - '${GITHUB_WORKSPACE}/.github/workflows/package.yml'
+    - 'iRime方案/iRime云方案/*'
+    - 'script/package/package.php'
+    - '.github/workflows/package.yml'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
