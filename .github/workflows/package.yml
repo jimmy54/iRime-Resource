@@ -20,7 +20,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-10.15
+    #runs-on: macos-10.15
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,13 +30,14 @@ jobs:
       with:
         ref: master
 
-    - name: install composer
-      run:  |
-        echo work space ${GITHUB_WORKSPACE}
-        cd ${GITHUB_WORKSPACE}/script/package
-        curl -sS https://getcomposer.org/installer | php
-        mv composer.phar /usr/local/bin/composer
-        ls -a ${GITHUB_WORKSPACE}/script/package
+    # install composer on mac os
+    #- name: install composer
+    #  run:  |
+    #    echo work space ${GITHUB_WORKSPACE}
+    #    cd ${GITHUB_WORKSPACE}/script/package
+    #    curl -sS https://getcomposer.org/installer | php
+    #    mv composer.phar /usr/local/bin/composer
+    #    ls -a ${GITHUB_WORKSPACE}/script/package
 
     # install yaml
     - name: update composer
