@@ -9,11 +9,17 @@ on:
     branches:
     - master
     paths-ignore:
-    - ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
+    - '${GITHUB_WORKSPACE}/script/package/last_update_schema.json'
+    paths:
+    - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
 
   pull_request:
     branches:
     - master
+    paths-ignore:
+    - '${GITHUB_WORKSPACE}/script/package/last_update_schema.json'
+    paths:
+    - '${GITHUB_WORKSPACE}/iRime方案/iRime云方案/*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
