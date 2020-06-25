@@ -29,15 +29,15 @@ jobs:
     - name: install composer
       run:  |
         echo work space ${GITHUB_WORKSPACE}
-        cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
+        cd ${GITHUB_WORKSPACE}/script/package
         curl -sS https://getcomposer.org/installer | php
         mv composer.phar /usr/local/bin/composer
-        ls -a /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
+        ls -a ${GITHUB_WORKSPACE}/script/package
 
     # install yaml
     - name: update composer
       run: |
-        cd /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package
+        cd ${GITHUB_WORKSPACE}/script/package
         composer update
 
     - name: run package script
@@ -47,4 +47,4 @@ jobs:
         ENDPOINT:  ${{secrets.ENDPOINT}}
         BUCKET:  ${{secrets.BUCKET}}
         UPLOADSCHEMAURL:  ${{secrets.UPLOADSCHEMAURL}}
-      run: php /Users/runner/runners/2.169.1/work/iRime-Resource/iRime-Resource/script/package/package.php
+      run: php ${GITHUB_WORKSPACE}/script/package/package.php
