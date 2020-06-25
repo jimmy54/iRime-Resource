@@ -8,6 +8,9 @@ on:
   push:
     branches:
     - master
+    paths-ignore:
+    - ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
+
   pull_request:
     branches:
     - master
@@ -48,3 +51,15 @@ jobs:
         BUCKET:  ${{secrets.BUCKET}}
         UPLOADSCHEMAURL:  ${{secrets.UPLOADSCHEMAURL}}
       run: php ${GITHUB_WORKSPACE}/script/package/package.php
+
+    - name: Git Commit and Push
+      uses: github-actions-x/commit@v2.6
+      with:
+        # Github Token with commit access
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        # Specify commit message
+        commit-message: 自动更新方案
+        files: - ${GITHUB_WORKSPACE}/script/package/last_update_schema.json
+
+
+
