@@ -125,9 +125,31 @@ class Package
 
         $ret = array();
         foreach ($schemaDir as $key => $value){
+            //是否新增
             if (!isset($schemas[$key])){
                 $ret[$key] = $value;
+                continue;
             }
+            //版本是否更新了
+            try {
+                $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $key. ".schema.yaml");
+                if (isset($schemaDetail['schema'])){
+                    $schema = $schemaDetail['schema'];
+                    $version = isset($schema['version']) ? $schema['version'] : '';
+                    if (!empty($version)){
+                        if(json_decode($schemas[$key], true)['version'] != $version){
+                            $ret[$key] = $value;
+                        }
+                    }else{
+                        echo "schema version is empty:".$key."\n";
+                    }
+                }else{
+                    echo $key."schema not exsit.\n"."detail:".print_r($schemaDetail, true)."\n";
+                }
+            } catch (ParseException $e) {
+                echo $key.":".$e->getMessage()."\n"; //
+            }
+
         }
         return $ret;
     }
