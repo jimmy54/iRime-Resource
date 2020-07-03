@@ -57,29 +57,27 @@ class Package
 
         //need update schema
         $updateSchemaArr = $this->needUpdateSchema($lastUpdateSchemas, $schemaArr);
-//        echo "neet update schema:".print_r($updateSchemaArr, true)."\n";
+        echo "neet update schema:".print_r($updateSchemaArr, true)."\n";
 
         $uploadSchema = array();
         foreach ($updateSchemaArr as $key => $value) {
 
             //schema to json
-
-            $schemaDirName =  explode("@", $key);
-            $schemaName = $schemaDirName[0];
-            $schemaVersion = $schemaDirName[1];
+            $schemaName = $key;
+            $schemaVersion = $lastUpdateSchemas[$key]['version'];
             if (empty($schemaName) || empty($schemaVersion)){
-                echo "schema dir error:".$key;
+                echo "schema dir error:".$key."\n";
                 continue;
             }
 
             //update to mysql
-                //zip schema file
-                $this->packageZip($value, $key);
+            //zip schema file
+            $this->packageZip($value, $key);
 
-                //upload to oss
-                $this->uploadToOSS($schemaName."_".$schemaVersion.".zip", self::ZIP_PATH."/".$key.".zip");
+            //upload to oss
+            $this->uploadToOSS($schemaName."_".$schemaVersion.".zip", self::ZIP_PATH."/".$key.".zip");
 
-                $uploadSchema[$key] = $this->schemaToJson(self::SCHEMA_PATH."/".$key."/".$schemaName.".schema.yaml");
+            $uploadSchema[$key] = $this->schemaToJson(self::SCHEMA_PATH."/".$key."/".$schemaName.".schema.yaml");
         }
         if(!empty($uploadSchema)) {
             echo "upload schema:".print_r($uploadSchema, true);
@@ -99,17 +97,15 @@ class Package
         $lasUpdateSchema = array();
 
         foreach ($schemaArr as $key => $value){
-                $pos = strpos($key, "@");
-                $schemaName = substr($key, 0, $pos);
                 try {
-                    $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $schemaName . ".schema.yaml");
+                    $schemaDetail = Yaml::parseFile(self::SCHEMA_PATH . "/" . $key . "/" . $key. ".schema.yaml");
                     if (isset($schemaDetail['schema'])){
                         $lasUpdateSchema[$key] = $schemaDetail['schema'];
                     }else{
                         echo $key."schema not exsit.\n"."detail:".print_r($schemaDetail, true)."\n";
                     }
                 } catch (ParseException $e) {
-                    echo $schemaName.":".$e->getMessage()."\n"; //
+                    echo $key.":".$e->getMessage()."\n"; //
                 }
         }
 
