@@ -17,6 +17,7 @@ class Package
     private $accessKeySecret;
     // Endpoint以杭州为例，其它Region请按实际情况填写。
     private $endpoint;
+
     // 设置存储空间名称。
     private $bucket;
 
