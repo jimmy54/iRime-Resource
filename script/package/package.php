@@ -55,17 +55,19 @@ class Package
 
         $lastUpdateSchemas = $this->lastUpdateSchema($schemaArr);
 //        echo "last update schema:".print_r($lastUpdateSchemas, true)."\n";
+//        return;
 
         //need update schema
         $updateSchemaArr = $this->needUpdateSchema($lastUpdateSchemas, $schemaArr);
         echo "neet update schema:".print_r($updateSchemaArr, true)."\n";
-
         $uploadSchema = array();
         foreach ($updateSchemaArr as $key => $value) {
 
             //schema to json
             $schemaName = $key;
-            $schemaVersion = json_decode($lastUpdateSchemas[$key], true)['version'];
+            $uploadSchema[$key] = $this->schemaToJson(self::SCHEMA_PATH."/".$key."/".$schemaName.".schema.yaml");
+
+            $schemaVersion = json_decode($uploadSchema[$key], true)['version'];
             if (empty($schemaName) || empty($schemaVersion)){
                 echo "schema dir error:".$key."\n";
                 continue;
@@ -75,18 +77,18 @@ class Package
             //zip schema file
             $this->packageZip($value, $key);
 
+
             //upload to oss
             $this->uploadToOSS($schemaName."_".$schemaVersion.".zip", self::ZIP_PATH."/".$key.".zip");
 
-            $uploadSchema[$key] = $this->schemaToJson(self::SCHEMA_PATH."/".$key."/".$schemaName.".schema.yaml");
         }
         if(!empty($uploadSchema)) {
             echo "upload schema:".print_r($uploadSchema, true);
             if($this->uploadSchema(json_encode(array_values($uploadSchema)))){
                 foreach ($uploadSchema as $uploadSchemaKey => $uploadSchemaValue){
-                    $lastUpdateSchemas[$uploadSchemaKey] = $uploadSchemaValue;
+                    $lastUpdateSchemas[$uploadSchemaKey] = json_decode($uploadSchemaValue, true);
                 }
-                file_put_contents(self::LAST_UPDATE_SCHEMA, json_encode($lastUpdateSchemas));
+                file_put_contents(self::LAST_UPDATE_SCHEMA, json_encode($lastUpdateSchemas, JSON_UNESCAPED_UNICODE));
             }else{
                 echo $key."upload fail";
             }
@@ -113,7 +115,7 @@ class Package
         if (!file_exists(self::LAST_UPDATE_SCHEMA)){
             return $lasUpdateSchema;
         }
-        return json_decode(file_get_contents(self::LAST_UPDATE_SCHEMA), true);
+        return json_decode(file_get_contents(self::LAST_UPDATE_SCHEMA), true, 10);
     }
 
 
@@ -138,7 +140,7 @@ class Package
                     $schema = $schemaDetail['schema'];
                     $version = isset($schema['version']) ? $schema['version'] : '';
                     if (!empty($version)){
-                        if(json_decode($schemas[$key], true)['version'] != $version){
+                        if($schemas[$key]['version'] != $version){
                             $ret[$key] = $value;
                         }
                     }else{
@@ -203,9 +205,11 @@ class Package
 
     private function uploadToOSS($name, $filePath)
     {
+        echo "uoloadToOSS name:".$name."\n";
         try {
             $ossClient = new OssClient($this->accessKeyId, $this->accessKeySecret, $this->endpoint);
-            $ossClient->uploadFile($this->bucket, $name, $filePath);
+            $res = $ossClient->uploadFile($this->bucket, $name, $filePath);
+            //echo "uoloadToOSS res:".print_r($res, true)."\n";
 
         } catch (OssException $e) {
             printf(__FUNCTION__ . ": FAILED\n");
