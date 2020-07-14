@@ -65,7 +65,7 @@ class Package
 
             //schema to json
             $schemaName = $key;
-            $schemaVersion = $lastUpdateSchemas[$key]['version'];
+            $schemaVersion = json_decode($lastUpdateSchemas[$key], true)['version'];
             if (empty($schemaName) || empty($schemaVersion)){
                 echo "schema dir error:".$key."\n";
                 continue;
