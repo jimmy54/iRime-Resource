@@ -1,10 +1,11 @@
-﻿# Rime schema settings
-# encoding: utf-8
+
 
 schema:
   schema_id: xkjd6
   name: 键道6
-  version: "2020-08-07"
+  version: "2020.08.20"
+  dependencies:
+    - xkjd6cx
 
 switches:
   - name: ascii_mode
@@ -15,17 +16,12 @@ switches:
   - name: jffh
     reset: 0
     states: [ 简体, 繁體 ]
-  - name: wxw_hint
-    reset: 1 # 改成0默认关闭
-    states: [ "开₆₃₀", "关₆₃₀" ]
-  - name: completion
-    states: [ "补全", "匹配" ]
-  - name: danzi_mode
-    reset: 0 # 改成1默认单字
-    states: [ 词组, 单字 ]
+  - name: wxw_prompt
+    reset: 1
+    states: [ 630关, 630开 ]
   - name: EN2en
     reset: 1
-
+    
 punctuator:
   full_shape:
     ' ' : { commit: '　' }
@@ -100,7 +96,6 @@ engine:
     - ascii_composer
     - recognizer
     - key_binder
-    # - lua_processor@topup_processor
     - speller
     - punctuator
     - selector
@@ -110,40 +105,28 @@ engine:
     - ascii_segmentor
     - matcher
     - abc_segmentor
-    # - affix_segmentor@uniqf
     - punct_segmentor
     - fallback_segmentor
   translators:
-    - lua_translator@date_translator
-    - lua_translator@time_translator
-    - lua_translator@number_translator
     - punct_translator
+    - table_translator@custom_phrase
+    - reverse_lookup_translator
     - table_translator
     - history_translator@repeat_history
-    - table_translator@custom_phrase
-    - table_translator@danzi_lookup
   filters:
-    - lua_filter@xkjd6_filter
+    - simplifier
+    - uniquifier
     - simplifier@emoji_cn
     - simplifier@jffh
     - simplifier@bmms
+    - simplifier@wxw_prompt
     - simplifier@EN2en
-    - uniquifier
-    - reverse_lookup_filter@danzi_lookup
+    - reverse_lookup_translator
 
 speller:
   auto_select: true
-  alphabet: "abcdefghijklmnopqrstuvwxyz;`"
-  initials: "abcdefghijklmnopqrstuvwxyz;`"
-  algebra:
-    - derive/^[bcdefghjklmnpqrstwxyz;]([bcdefghjklmnpqrstwxyz;][auiov].*)$/`$1/
-    - derive/^([bcdefghjklmnpqrstwxyz;])[bcdefghjklmnpqrstwxyz;]([auiov].*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2})[auiov](.*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2}[auiov`]).(.*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2}[auiov`]{2}).(.*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2}[auiov`]{3}).(.*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2}[auiov`]{4}).(.*)$/$1`$2/
-    - derive/^([bcdefghjklmnpqrstwxyz;`]{2}[auiov`]{5}).$/$1`/
+  alphabet: "zyxwvutsrqponmlkjihgfedcba;"
+  initials: "abcdefghijklmnopqrstuvwxyz;"
 
 translator:
   dictionary: xkjd6.extended
@@ -160,6 +143,15 @@ repeat_history:
   size: 1
   initial_quality: 10000
 
+wxw_prompt:
+  opencc_config: wxwprompt.json
+  option_name: wxw_prompt
+  show_in_comment: true
+  comment_format:
+    - "xform/^([bcdefghjklmnpqrstwxyz]{2,4})([avuio]{0,3})_(.+)$/〔$3, $1$2〕/"
+    - xform/^([a-z]+)$/$2/
+  tips: all
+
 EN2en:
   opencc_config: EN2en.json
   option_name: EN2en
@@ -170,7 +162,7 @@ emoji_cn:
   tips: all
 
 jffh:
-  opencc_config: s2t.json
+  opencc_config: s2tw.json
   option_name: jffh
 
 bmms:
@@ -178,29 +170,20 @@ bmms:
   option_name: bmms
   show_in_comment: true
   comment_format:
-    - "xform/'/ /"
-
-danzi_lookup:
-  tags: [ danzi_lookup ]
-  dictionary: xkjd6.extended
-  enable_charset_filter: false
-  enable_completion: false
-  enable_encoder: false
-  enable_sentence: false
-  enable_user_dict: false
-  encode_commit_history: false
-  overwrite_comment: true
-  initial_quality: 0
-  comment_format:
-    - xform/^/〔/
-    - xform/$/〕/
-    - xform/ /, /
+    - xform/'/ /
 
 custom_phrase:
   dictionary: ""
   user_dict: custom_phrase
   db_class: stabledb
   enable_sentence: false
+
+reverse_lookup:
+  dictionary: xkjd6cx
+  comment_format:
+    - xform/^/〔/
+    - xform/$/〕/
+    - xform/ /, /
 
 key_binder:
   bindings:
@@ -215,11 +198,5 @@ key_binder:
 recognizer:
   import_preset: default
   patterns:
-    danzi_lookup: "[a-z`]*`+[a-z`]*"
+    reverse_lookup: "[a-z`]*`+[a-z`]*"
     punct: "^/([0-9]0?|[a-z]+)$"
-    email: "^[a-z][-_.0-9a-z]*@.*$"
-    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-    pinyin: "(?<![`A-Z])`[a-z']*;?$"
-    url: "^(www[.]|https?:|ftp:|mailto:).*$"
-    # uniqf: "^[qwertyplkjhgfdszxcbnm][avuio]{2}$|^[qwertyplkjhgfdszxcbnm]{2}[avuio]{0,4}$|^[qwertyplkjhgfdszxcbnm]{3}[avuio]{1,3}$|^[qwertyplkjhgfdszxcbnm]{4}[avuio]{0,3}$"
-    # special: "^(?:;?[avuio])[qwertyplkjhgfdszxcbnm]{0,}"
