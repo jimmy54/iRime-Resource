@@ -1,16 +1,13 @@
 # 简易索引  
-- 下载及安装
-  - 稳定版：[F-Droid][]，[酷安][]，[Google Play][]，[Releases][]  
-  - [测试版][]
-- 添加输入方案
-  - [简易图解][]（待更新）  
+- 教程来自同文
+
+- 添加输入方案  
   - [常用输入方案][]（或至 [Rime 同文堂][]（480159874）下载“Brise 懒人包”）  
   - [更多开源输入方案][]  
 - 学习如何DIY
-  - 配置输入法（键盘及各种界面功能），可参考[`trime.yaml`详解][]。  
   - 配置输入方案，请参阅 [Rime说明书][]。
 
-`附表1: （同文）Rime 文件分布、作用及相关教程`  
+`附表1: （Rime 文件分布、作用及相关教程`  
 
 |文件&文件夹|作用及相关教程|
 |------|------|
@@ -27,12 +24,9 @@
 |:page_facing_up:`<方案标识>.schema.yaml`<br>:page_facing_up:`<方案标识>.custom.yaml `|<u>输入方案定义及其补丁文件</u>：输入方案的**设定**。可参考[详解输入方案][] 以及 [`schema.yaml`详解][]|
 |:page_facing_up:`<词典名>.dict.yaml`<br>:page_facing_up:`<词典名>.<分词库名>.dict.yaml`|<u>输入方案词典及其分词库</u>：输入方案所使用的**词典**(包含词条、编码、构词码、权重等信息)。详见[码表与词典][] 以及 [`dict.yaml`详解][]|
 |:page_facing_up:`symbols.yaml`|<u>扩充的特殊符号</u>：提供了比`default.yaml`更为丰富的特殊符号，[symbols.yaml用法说明][]。|
-|:page_facing_up:`trime.yaml`<br>:page_facing_up:`trime.custom.yaml`<br>:page_facing_up:`xxx.trime.yaml`<br>:page_facing_up:`xxx.trime.custom.yaml`|<u>同文主题及其补丁文件</u>：定义键盘**配色、布局、样式等**。可参考[`trime.yaml`详解][]|
 |:page_facing_up:`user.yaml`|<u>用户状态信息</u>：用来保存当前所使用的方案ID，以及各种开关的状态。|
 
-[Google Play]:https://play.google.com/store/apps/details?id=com.osfans.trime
-[Releases]:https://github.com/osfans/trime/releases  
-[酷安]:https://www.coolapk.com/apk/com.osfans.trime
+
 [F-Droid]:https://f-droid.org/packages/com.osfans.trime/
 [测试版]:https://osfans.github.io/trime/
 [Rime 同文堂]:http://shang.qq.com/wpa/qunwpa?idkey=e31ecec8f92699597d9154f890841b3e477f5185902f10400e7c9e670a11202f
